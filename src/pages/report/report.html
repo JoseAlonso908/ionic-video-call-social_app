@@ -1,0 +1,35 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title><ion-icon name="close" style="margin-right: 10px" (click)="redirect()"></ion-icon> report</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+        <ion-col *ngIf="!messageSent" offset-lg-4 offset-xl-4 offset-md-3 offset-sm-2>
+
+                  <div class="reportitems">
+                    Hello {{from}}!<br/><br/>
+                    Please describe your issue about <strong>{{about}}</strong> in the texatarea below.
+                  </div>
+                <div style="margin-top:50px">
+                    <textarea placeholder="type your message here" [(ngModel)]="message" rows="10" col-lg-6 col-xl-6 col-md-10 col-12 col-sm-11></textarea>
+                    <br/><br/><br/><br/>
+                    <button [disabled]="(message === undefined || message.trim() === '')" (click)="sendMessage('sendMessage')" class="repotBtn">Report</button>
+                </div>
+        </ion-col>
+        <ion-col  *ngIf="messageSent" offset-lg-4 offset-xl-4 offset-md-3 offset-sm-2 >
+                <div style="margin-top:200px">
+                  <span>Thank you, message sent successfully. We will look into it.</span><br/>
+                    <button class="repotBtn" style="margin-top:50px" (click)="sendMessage('done')"> Done </button>
+                </div>
+
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

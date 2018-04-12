@@ -1,0 +1,29 @@
+<ion-content class="transparent trans" >
+  <ion-row class="transparent">
+    <ion-col class="transparent" offset-xl-2 offset-lg-2 offset-md-2 offset-sm-1  col-xl-8 col-lg-8 col-md-8 col-sm-10 col-12>
+        <ion-item class="signIn transparent" no-lines>
+        <ion-icon class="transparent" name="close" (click)="redirect()"></ion-icon>
+        <div style="text-align: center;">
+  			<img src="{{provider.url+''+friendInfo.Profile_pic}}" class="profileImage1">
+          <span class="transparent name">{{friendInfo.userName}}</span>
+      </div>
+        </ion-item>
+        <ion-item *ngIf="image" class="transparent" no-lines col-12 col-xl-10 offset-1   offset-lg-5 offset-md-5 offset-sm-5  style="padding-left:5%">
+          <img class="image" offset-xl-4 offset-lg-2 offset-md-1 offset-sm-1 src="{{image}}" >
+          <div offset-xl-4 offset-lg-2 offset-md-1 offset-sm-1  style="width:350px;font-weight: bold;" >
+          </div>
+        </ion-item>
+       
+	     
+    </ion-col>
+  </ion-row>
+</ion-content>
+<ion-footer >
+	 <div offset-lg-2 offset-xl-2  offse-md-2 offset-sm-2  style="padding-top:50px;">
+	  	 <textarea  [(ngModel)] = "message" placeholder="Type your mssage here." class="textArea"></textarea>
+	  	 <ion-icon name="sad" class="chatIcon emoji" (click)="toggled = !toggled" [(emojiPickerIf)]="toggled" [emojiPickerDirection]="'top'"
+	           (emojiPickerSelect)="handleSelection($event)"></ion-icon>
+	  	 <button (click)="sendMessage(message)" class="chatIcon emoji emoji2" style="margin-left:40px;height:41px"><ion-icon name="send" ></ion-icon></button>
+			
+		</div>
+</ion-footer>

@@ -1,0 +1,115 @@
+
+<ion-content>
+	<ion-grid class="padding">
+		<ion-row style="height: 100%">
+			<ion-col class="padding" style="text-align: center;">
+				<img id="slideImage" src="images/slide.jpeg">
+				<div style="display: none" id="content">
+					<div>
+						<img src="images/icon.jpg" id="logo">
+						<div col-lg-6 offset-lg-3 col-xl-6 offset-xl-3 col-sm-8 offset-sm-2 col-md-6 offset-md-3>
+							<div class="errMessage">* {{errorMessage}}</div>
+							<div id="login">
+								<ion-item no-lines>
+									<ion-label floating style="font-size:14px;text-align: center;color: #D80D88">Email</ion-label>
+									<ion-input (ionFocus)="focus()" [(ngModel)]="email" type="email"></ion-input>
+								</ion-item>
+								<ion-item no-lines>
+									<ion-label floating style="font-size:14px;text-align: center;color: #D80D88">Password</ion-label>
+									<ion-input (ionFocus)="focus()" [(ngModel)]="password"  type="password"></ion-input>
+								</ion-item>
+								<ion-item no-lines>
+									<button class="indexBtn" (click)="indexSubmit('login',[email.trim(), password.trim()])" style="margin-top: 10px;" [disabled]="(!email || email.trim() == ''|| !password || password.trim() == '')">Sign in</button>
+								</ion-item>
+								<ion-item no-lines>
+									<button class="indexBtn" style="margin-top:-25px;color:grey;font-size: 14px;background-color: transparent;" (click)="hideShow('login', 'fgPass')">Forgot password ?</button>
+								</ion-item>
+								<ion-item no-lines>
+									<button class="indexBtn" style="margin-top: 10px;color:black;font-size: 14px;background-color: transparent;"(click)="hideShow('login', 'Signup')">Create a new account.</button>
+								</ion-item>
+						  </div>
+						  <div class="hideClass" style="display: none" id="Signup">
+								<ion-item no-lines>
+									<ion-label floating style="font-size:14px;text-align: center;color: #D80D88">Username</ion-label>
+									<ion-input (ionFocus)="focus()" [(ngModel)]="username"  type="text" maxlength="30"></ion-input>
+								</ion-item>
+								<ion-item no-lines>
+									<ion-label floating style="font-size:14px;text-align: center;color: #D80D88">Email</ion-label>
+									<ion-input (ionFocus)="focus()" [(ngModel)]="email1"  type="email"></ion-input>
+								</ion-item>
+								<ion-item no-lines>
+									<ion-label floating style="font-size:14px;text-align: center;color: #D80D88">Password</ion-label>
+									<ion-input (ionFocus)="focus()" [(ngModel)]="password1"  type="password"></ion-input>
+								</ion-item>
+								<ion-item no-lines>
+									<button class="indexBtn"   (click)="indexSubmit('signup',[email1.trim(), password1.trim(), username.trim()])" [disabled]="(!email1 || email1.trim() == '' || !password1 || password1.trim() == '' || !username || username.trim() == '')" style="margin-top: 10px;">Sign up</button>
+								</ion-item>
+								
+								<ion-item no-lines>
+									<button class="indexBtn" style="margin-top: 10px;color:grey;font-size: 14px;background-color: transparent;" (click)="hideShow('Signup','login')">Already have an account? Log in</button>
+								</ion-item>
+						  </div>
+						  <div class="hideClass" style="display: none" id="fgPass">
+							  	<div style="display: none" id="fgPass2">
+									<ion-item no-lines>
+										<ion-label floating style="font-size:14px;text-align: center;color: #D80D88">New password</ion-label>
+										<ion-input (ionFocus)="focus()" [(ngModel)]="pass1" type="password"></ion-input>
+									</ion-item>
+									<ion-item no-lines>
+										<ion-label floating style="font-size:14px;text-align: center;color: #D80D88">Confirm password</ion-label>
+										<ion-input (ionFocus)="focus()" [(ngModel)]="pass2"  type="password"></ion-input>
+									</ion-item>
+									<ion-item no-lines>
+										<button class="indexBtn" [disabled]="(!pass1 || pass1.trim() == '' || !pass2 || pass2.trim() == '')" (click)="indexSubmit('passReset', [pass1, pass2])" style="margin-top: 10px;">Reset Password</button>
+									</ion-item>
+								</div>
+								<div id="fgPass3">
+									<ion-item no-lines>
+										<ion-label floating style="font-size:14px;text-align: center;color: #D80D88">Your email</ion-label>
+										<ion-input (ionFocus)="focus()" [(ngModel)]="email2" type="text"></ion-input>
+									</ion-item>
+									<ion-item no-lines>
+										<button class="indexBtn" (click)="indexSubmit('fgPass',[email2.trim()])" [disabled]="(!email2 || email2.trim() == '')"  style="margin-top: 10px;">Submit</button>
+									</ion-item>
+						        </div>
+								<ion-item no-lines>
+									<button class="indexBtn" style="margin-top: 10px;color:grey;font-size: 14px;background-color: transparent;" (click)="hideShowx()">Back to log in</button>
+								</ion-item>
+						  </div>
+						   <div class="hideClass" style="display: none" id="verification">
+								<ion-item no-lines>
+									<ion-label floating style="font-size:14px;text-align: center;color: #D80D88">Enter verification code sent to your email</ion-label>
+									<ion-input (ionFocus)="focus()" [(ngModel)]="verCode" (keypress)="onKeyPress($event)" type="text" maxlength="6"></ion-input>
+								</ion-item>
+								<ion-item no-lines>
+									<button class="indexBtn" [disabled]="(!verCode || verCode.trim() == '' || verCode.length < 6)" style="margin-top: 10px;"   (click)="indexSubmit('codeVerification',[verCode])" >Continue</button>
+								</ion-item>
+								<ion-item no-lines>
+									<button class="indexBtn resendBtn" style="margin-top: 10px;background-color: transparent;color: #D80D88"   (click)="indexSubmit('ResendCode',['code'])" >Resend code</button>
+								</ion-item>
+								<ion-item no-lines>
+									<button class="indexBtn" style="margin-top: 10px;color:grey;font-size: 14px;background-color: transparent;"  (click)="hideShowx()" >Back to log in</button>
+								</ion-item>
+					        </div>
+					        <div style="display: none" id="verification2">
+								<ion-item no-lines>
+									<ion-label floating style="font-size:14px;text-align: center;color: #D80D88">Enter verification code sent to your email</ion-label>
+									<ion-input (ionFocus)="focus()" [(ngModel)]="verCode2" (keypress)="onKeyPress($event)" type="text" maxlength="6"></ion-input>
+								</ion-item>
+								<ion-item no-lines>
+									<button class="indexBtn" [disabled]="(!verCode2 || verCode2.trim() == '' || verCode2.length < 6)" style="margin-top: 10px;"   (click)="indexSubmit('codeVerification2',[verCode2])" >Continue</button>
+								</ion-item>
+								<ion-item no-lines>
+									<button class="indexBtn resendBtn2" style="margin-top: 10px;background-color: transparent;color: #D80D88"   (click)="indexSubmit('ResendCode2',['code'])" >Resend code</button>
+								</ion-item>
+								<ion-item no-lines>
+									<button class="indexBtn" style="margin-top: 10px;color:grey;font-size: 14px;background-color: transparent;"  (click)="hideShowx()" >Back to log in</button>
+								</ion-item>
+					        </div>
+						</div>
+					</div>
+				</div>
+			</ion-col>
+		</ion-row>		
+	</ion-grid>
+</ion-content>

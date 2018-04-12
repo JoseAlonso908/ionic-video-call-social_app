@@ -1,0 +1,56 @@
+page-calls {
+	 .transparent{
+    	background-color: transparent;
+    	color: white;
+    }
+    .trans{
+    	background-color: rgba(0,0,0,0.7);
+    }
+    .trans2{
+    	background-color: rgba(0,0,0,0.3);
+    }
+    .friendImage{
+   	height:50px;
+   	width:50px;
+   	border-radius: 50%;
+   }
+   .messtime{
+		font-size: 11px;
+		font-weight: bolder;
+		margin-left: 10px;
+		color:orange;
+		margin-top: 25px;
+
+	}
+  .closeBtn{
+    color: white; 
+    font-size: 25px;
+    background-color: transparent;
+  }
+   .itemDes{
+    background-color: transparent;
+   	border-bottom: 1px solid lightgrey;
+   	display: inline-block;
+   	width: 90%;
+   	font-size: 13px;
+   	color: white;
+   	padding: 0px;
+   	margin:0px;
+
+   }
+   .mainDiv{
+   	height:65px;
+   }
+   .name{
+		position: relative;
+		top: 0px;
+		font-size: 15px;
+		font-weight: bold;
+		color: white
+	}
+	 .friendIcon{
+   	margin-right: 20px;
+   	color:#D80D88;
+   	font-size: 20px;
+   }
+}

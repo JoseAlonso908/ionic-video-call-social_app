@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar color="primary">
+  	<img src="{{provider.url+''+friend.image}}" class="profileImage">
+  	<span class="name">{{friend.name}} </span>
+  	<span class="callType">{{callType}}</span>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+	<ion-grid class="height">
+		<ion-row class="height">
+			<ion-col col-12 class="height" style="">
+			     	<!--<div *ngIf="callType1 == 'audio' " class="height" >
+			     		<img offset-sm-2 col-sm-8 offset-md-2 col-md-8 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6  style="height:100%; width:100%; margin:0px;padding: 0px" src="{{provider.url+''+friend.image}}" />
+			     	     <audio controls autoplay="true" id="audio">                                        
+				                <source >                                                        
+				        </audio>
+				    </div>-->
+			     	
+	                <video id="video" col-12 height="600" autoplay  *ngIf="callType1 == 'video' ">
+					  <source  type="video/mp4">
+					</video>
+			 </ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>
+<ion-footer style="background-color: #D80D88;padding:20px">
+	<div style="text-align: center; height:100%">
+     		<button *ngIf="(data.callType == 'video' && callStatus == 'ongoing')" class="btn" style="background-color: lightgrey;">
+	     		<ion-icon  name="reverse-camera" class="iconx" style="color: #D80D88"></ion-icon>
+	     	</button>
+     		<button *ngIf="(callStatus == 'called')" id="acceptCall" class="btn" style="background-color: #57ce44">
+	     		<ion-icon name="call" class="iconx" ></ion-icon>
+	     	</button>
+     		<button id="endCall" class="btn" style="background-color: red;">
+     		   <ion-icon  name="call" class="iconx" ></ion-icon>
+     		</button>
+     		<button class="btn" style="background-color: lightgrey;">
+	     		<ion-icon *ngIf="(  mic == false)" name="mic-off" class="iconx" style="color: #D80D88"></ion-icon>
+     		    <ion-icon *ngIf="(  mic == true)" name="mic" class="iconx" style="color: #D80D88"></ion-icon>
+	     	</button>
+ 	</div>
+</ion-footer>

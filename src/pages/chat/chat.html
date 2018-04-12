@@ -1,0 +1,107 @@
+
+<ion-header (click)="readAll()" style="height:55px;">
+  <ion-navbar color="primary" style="height:40px;">
+  	<img src="{{provider.url+''+friendInfo.Profile_pic}}" class="profileImage">
+  	<span class="name">{{friendInfo.userName}} </span>
+    <button class="moreIcon"  *ngIf="(friendInfo.More && deleteChats.length > 0)" (click)="provider.socketRequest({data: ['DeleteMessageSelected', myId, friendInfo.Email, deleteChats]})">
+    <ion-icon name="trash"  ></ion-icon>
+  </button>
+    <button class="moreIcon"   *ngIf="(friendInfo.More && deleteChats.length == 0)" (click)="presentPopover($event, ['chat', myId, friendInfo.Email])">
+    <ion-icon name="more" ></ion-icon>
+  </button>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content style="background-image: url(images/bg.jpeg)"  (click)="readAll()">
+    <ion-grid>
+    	<ion-row>
+    		<ion-col on-scroll="gotScrolled($event)" *ngIf="(messages.length > 0)" class="textDivision"  id="content">
+                        <div *ngIf="Fetching == true" class="floatingMenu" >
+                        	   <button class="loader">
+                        		 <img class="loader1" src="images/loader.gif">
+                        	  </button>
+                          </div>
+                    <div col-12 *ngFor="let message of messages let y = index "  (press)="selectMessage(message.id)" (click)="clickMessage(message.id)" style="position: relative; clear: both;width:100%;">
+                            <div *ngIf="y === 0" class="timeDiv">
+                              <span *ngIf="message.date === dateCheck[0]" class="day" >Today</span>
+                              <span *ngIf="message.date ==  dateCheck[1]" class="day" >Yesterday</span>
+                              <span *ngIf="( message.date !==  dateCheck[0] && message.date !== dateCheck[1] )" class="day" >{{message.date}}</span>
+                            </div>
+                            <div *ngIf="(y > 0 && message.date !== messages[y-1].date )" class="timeDiv" >
+                              <span *ngIf="message.date == dateCheck[0]" class="day" >Today</span>
+                              <span *ngIf="message.date ==  dateCheck[1]" class="day" >Yesterday</span>
+                              <span *ngIf="( message.date !==  dateCheck[1] && message.date !==  dateCheck[0])" class="day" >{{message.date}}</span>
+                            </div>
+
+                        <div  *ngIf="message.from === myId" id="{{message.id}}">
+                            <div style="display:inline-block;max-width: 80%;">
+                            	<br *ngIf="(y > 0 && messages[y-1].from !== message.from)"/>
+                              <div class="textFrom">
+                               <div class="image1">
+                              	<div *ngIf="message.image" class="image"  >
+                       						 <img *ngIf="message.image.split('.')[1]" 
+                                   (click)="showImage([provider.url+''+message.image, message.message])" src="{{provider.url+''+message.image}}" >
+                                   <img *ngIf="!message.image.split('.')[1]" src="assets/icon/load.gif" >
+                     						</div>
+                              </div>
+                               
+                                <div style="margin-left:10px;">{{message.message}}<br/>
+                               <span class="time time2" >
+                                 <ion-icon *ngIf="message.read == false" style="color: lightgrey; font-size: 9px " name="star"></ion-icon> 
+                                 <ion-icon *ngIf="message.read == true" style="color: gold; font-size: 9px" name="star"></ion-icon> 
+                             <span style="font-size: 10px;font-weight: bold;">{{message.time}}</span></span>
+                                </div>
+
+                            </div>
+                          </div>
+                        </div>
+
+                        <div  *ngIf="(message.to === myId || (message.from && message.from !== myId))"   id="{{message.id}}" style="float: right;height:auto;width:100%;padding-top: 5px; padding-bottom: 5px" >
+                          
+                          <div class="textTo1"> 
+                          	<br *ngIf="(y > 0 && messages[y-1].to !== message.to)"/>
+                            <div class="textTo">
+                               <div class="image1">
+                              	<div  *ngIf="message.image" class="image" >
+                    						    <img *ngIf="message.image.split('.')[1]" (click)="showImage([provider.url+''+message.image, message.message])" src="{{provider.url+''+message.image}}" >
+                                    <img *ngIf="!message.image.split('.')[1]" src="assets/icon/load.gif" >
+                    					   </div>
+                               </div>
+
+                             <div style="margin-left:10px;">{{message.message}}<br/>
+                                <div class="time" style="float:right;font-size: 10px;font-weight: bold;">
+                                  <span class="time2" style="color:grey">{{message.time}}</span></div>
+                                </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+    		</ion-col>
+    	</ion-row>
+    </ion-grid>
+</ion-content>
+<ion-footer>
+	<div  *ngIf="block == true" style="padding:15px; text-align: center;font-size:15px">
+		<span style="color: grey; font-weight: bold;">You cannot chat with {{friendInfo.userName}} at the moment.</span>
+	</div>
+	<div col-12  *ngIf="block == false" style="display: inline-block;">
+  <div class="chaticonsdiv" col-10>
+       <button class="chatIcon" col-1 (click)="takePicture(['sendImage','takeImage',this.myId])">
+             <ion-icon  name="camera" >
+             </ion-icon>
+      </button>
+       <button class="chatIcon" (click)="takePicture(['sendImage','chooseImage',this.myId])">
+           <ion-icon name="image"   ></ion-icon>
+       </button>
+        <textarea col-8 col-lg-10 col-md-10 col-sm-9 col-xl-10 [(ngModel)] = "message"  placeholder="Aa" class="textArea"></textarea>
+         <button   class="chatIcon emoji"  (click)="toggled = !toggled" [(emojiPickerIf)]="toggled" [emojiPickerDirection]="'top'"
+           (emojiPickerSelect)="handleSelection($event)">
+        <ion-icon  name="sad" ></ion-icon>
+    </button>
+  </div>
+  	 <button col-2  [disabled]="(!message|| message.trim() == '')" (click)="sendMessage(message.trim())" class="chatIcon sendbtn">
+      <ion-icon name="send" ></ion-icon>
+    </button>
+	</div>
+</ion-footer>

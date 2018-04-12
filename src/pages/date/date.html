@@ -1,0 +1,23 @@
+<ion-content class="transparent trans" (click)="redirect()">
+  <ion-row class="transparent">
+    <ion-col class="transparent" offset-xl-2 offset-lg-2 offset-md-2 offset-sm-1  col-xl-8 col-lg-8 col-md-8 col-sm-10 col-12>
+      <ion-list class="transparent">
+        <ion-item class="signIn transparent" no-lines>
+        <ion-icon class="transparent" name="close" ></ion-icon>
+          <span offset-xl-5 offset-lg-5 offset-md-5 offset-sm-5 offset-4 class="transparent">Profile</span>
+        </ion-item>
+        <ion-item class="transparent" no-lines col-12 col-xl-10 offset-1   offset-lg-5 offset-md-5 offset-sm-5  style="padding-left:5%">
+          <img class="image" offset-xl-4 offset-lg-2 offset-md-1 offset-sm-1 src="{{provider.url+''+friendInfo.Profile_pic}}" >
+          <div offset-xl-4 offset-lg-2 offset-md-1 offset-sm-1  style="width:350px;font-weight: bold;" >
+              <br/>
+            <span style="color:#B0B0B0;font-size:17px;margin-left:5%">{{friendInfo.userName}}</span>
+            <span style="color:#B0B0B0;font-size:13px;margin-right:10%; float:right;">{{friendInfo.age}} / {{friendInfo.gender}} / {{friendInfo.orientation}}</span>
+          </div>
+        </ion-item>
+        <ion-item class="transparent">
+          <button   offset-xl-2 col-xl-8 offset-lg-2  col-lg-8  col-md-9 col-sm-10 offset-md-1 offset-sm-1 class="SignBtn" (click)="sendMessage()">Start Chat</button>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-content>

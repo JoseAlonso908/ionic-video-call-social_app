@@ -1,0 +1,15 @@
+<ion-content class="transparent trans" >
+      <div class="transparent" >
+        <ion-item class="signIn transparent" no-lines>
+        <ion-icon class="transparent"  style="font-size: 30px" name="close" (click)="redirect('close')"></ion-icon><br/>
+        <div style="color:white; font-size: 17px; font-weight: bold; text-align: center;">{{name}}</div>
+        <ion-icon class="transparent"  style="float: right; margin-right: 10px" name="brush" (click)="redirect('camera')"></ion-icon>
+        </ion-item>
+        <ion-item class="transparent" no-lines col-12 col-xl-10 offset-1   offset-lg-5 offset-md-5 offset-sm-5  style="padding-left:5%">
+          <img class="image" offset-xl-4 offset-lg-2 offset-md-1 offset-sm-1 src="{{profileImage}}" >
+          <div offset-xl-4 offset-lg-2 offset-md-1 offset-sm-1  style="width:350px;font-weight: bold;" >
+          </div>
+        </ion-item>
+       
+      </div>
+</ion-content>

@@ -1,0 +1,28 @@
+page-index {
+  
+   ion-input{
+   	border-bottom: 1px solid lightgrey;
+   	font-family:arial;
+   	color: grey;
+   	font-size: 15px;
+   }
+   #logo{
+   	height:250px;
+   	width:250px;
+   	margin-top: 20px;
+   	border-radius: 50%;
+   }
+   .indexBtn{
+   	width:100%;
+   	border-radius: 20px;
+   	font-size: 14px;
+   	height:35px;
+   	color: white;
+   	background-color: #D80D88;
+   }
+   .errMessage{
+   	color:red;
+   	font-size: 13px;
+    display: none;
+   }
+}

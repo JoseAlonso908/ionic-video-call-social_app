@@ -1,0 +1,26 @@
+page-date {
+   .SignBtn{
+    width:100%;
+   	border-radius: 20px;
+   	font-size: 14px;
+   	height:35px;
+   	color: white;
+   	background-color: #D80D88;
+  }
+	  .image {
+	  height:350px;
+	  width:400px;
+	  -webkit-filter: blur(10px);
+	  -moz-filter: blur(10px);
+	  -o-filter: blur(10px);
+	  -ms-filter: blur(10px);
+	  filter: blur(10px);
+	}
+    .transparent{
+    	background-color: transparent;
+    	color: white;
+    }
+    .trans{
+    	background-color: rgba(0,0,0,0.7);
+    }
+}

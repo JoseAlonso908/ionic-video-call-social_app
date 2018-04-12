@@ -1,0 +1,87 @@
+page-send-pic {
+.SignBtn{
+    width:100%;
+   	border-radius: 20px;
+   	font-size: 14px;
+   	height:35px;
+   	color: white;
+   	background-color: #D80D88;
+  }
+	  .image {
+	  height:350px;
+	  width:400px;
+	  
+	}
+  ion-footer{
+    padding-bottom: 20px;
+    padding-left: 10px;
+  }
+    .transparent{
+    	background-color: transparent;
+    	color: white;
+    }
+    .trans{
+    	background-color: rgba(0,0,0,0.8);
+    }
+    .profileImage1{
+	position: absolute;
+	left:60px;
+	border-radius: 50%;
+	top:2px;
+	width:40px;
+	height:40px;
+
+    }
+
+     .name{
+	color: white;
+	position: absolute;
+	left:120px;
+	top:15px;
+	font-weight: bold;
+	font-size: 16px;
+  }
+      .moreIcon{
+    color: white;
+    font-size: 25px;
+    float: right;
+    margin-right: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+       .emoji{
+  	background-color: white;
+    padding:9px;
+    position: absolute;
+    margin-top:1px;
+    margin-left: -1px;
+  }
+  .emoji2{
+  	border-radius: 0px 20px 20px 0px;
+  	padding-left: 10px;
+    
+  }
+  .chatIcon{
+  	color: #D80D88;
+    font-size: 23px;
+    margin-left: 10px;
+    font-weight: bold;
+    background-color: transparent;
+  }
+  .textDivision{
+  overflow:hidden;
+   overflow-y:auto;border:none;
+   padding-bottom: 70px;
+}
+.textArea{
+    padding: 5px;
+    border: none;
+    background-color: transparent;
+  	border-bottom: 1px solid white;
+  	width: 75%;
+  	color:white;
+  	margin-left: 5px;
+  	resize:none;
+  	height: auto;
+  }
+}

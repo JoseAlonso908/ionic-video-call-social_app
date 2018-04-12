@@ -1,0 +1,194 @@
+
+
+<ion-content>
+ <ion-grid class="padding"  style="overflow:hidden;height: 100%">
+	<ion-row style="height: 100%">
+		<ion-col  style="padding:0px; height:100%">
+			<div id="Header"  col-12>
+				<div id="blindy">
+					<span class="appName">Blindy</span>
+					<button class="searchIcon">
+				     	<ion-icon style="font-size: 35px" name="more" (click)="presentPopover($event, 'home')"></ion-icon>
+				    </button> 
+					<button class="searchIcon search1" style="display:none;font-size: 35" (click)="search('Header', 'Header2', 'srch')">
+						<ion-icon  name="search"></ion-icon>
+					</button>
+					<span class="scroll"></span>
+
+				</div>
+				<div col-12 style="padding-bottom: 0px; padding-top: 10px">
+					<button col-3 class="menuItem active cls0" (click)="switchSlide(0)">Home</button>
+					<button col-3 class="menuItem cls1" (click)="switchSlide(1)">Friends
+						<span class="friendNote">
+							0
+						</span></button> 
+					<button col-3 class="menuItem cls2" (click)="switchSlide(2)">Chat
+					<ion-icon  class="chatNote" name="chatbubbles"></ion-icon>
+						
+					</button>
+					<button col-2  class="menuItem cls3" (click)="switchSlide(3)">Profile</button>
+				</div>
+			</div>
+			<div id="Header2">
+				<button style="background-color: transparent;">
+					<ion-icon (click)="search('Header2', 'Header','hide')" class="backArrow" name="arrow-round-back">
+					</ion-icon>
+				</button>
+				<input [(ngModel)]="searchValue" type="text" (keyup)="searchFunction(searchValue)" placeholder="search here..." >
+					<ion-icon *ngIf="searchValue" (click)="clearSearch()" class="iconClose" name="close"></ion-icon>
+			</div>
+			<ion-slides (ionSlideDidChange)="slideChanged()">
+				
+				<ion-slide class="content" id="content" on-scroll="gotScrolled($event, 'content')">
+					<div class="slideDiv" col-3></div>
+					  <div *ngIf="profileComplete == false" style="color:grey;margin-top:20%">
+		                    <span style="color:grey;font-size:30px;">Welcome to <span style="font-family: cursive;">Blindy</span> !!</span><br/><br/><br/><br/>
+		                     <span style="color:black;font-size:14px;font-weight: bold;">To start meeting new <br/>people, 
+		                     	<span style="color:#D80D88">CLICK HERE</span> to fill your profile.</span><br/><br/>
+						     <img src="images/icon.jpg" id="logo">
+		                      
+		                      </div>
+						  <div *ngIf="profileComplete == true" >
+						  	<div  *ngFor="let info2 of profileinfo2 let n = index ">
+							<div class="title">{{info2.title}}</div>
+							<ion-list *ngIf="n == 0" radio-group [(ngModel)]="age1">
+							  <ion-item no-lines *ngFor="let option of info2.options">
+							    <ion-label class="ionlist">{{option}}</ion-label>
+							    <ion-radio  value="{{option}}" checked></ion-radio>
+							  </ion-item>
+							</ion-list>
+							<ion-list *ngIf="n == 1" radio-group [(ngModel)]="intension1">
+							  <ion-item no-lines *ngFor="let option of info2.options">
+							    <ion-label class="ionlist">{{option}}</ion-label>
+							    <ion-radio value="{{option}}" checked></ion-radio>
+							  </ion-item>
+							</ion-list>
+	               		</div>
+	               		<ion-item no-lines>
+						  <ion-label floating class="ionlist">Select country of friend search</ion-label>
+						  <ion-select [(ngModel)]="country1" (ionChange)="countryChanged1(country1)">
+						    <ion-option *ngFor="let country of countries1" value="{{country}}">{{country}}</ion-option>
+						  </ion-select>
+						</ion-item ><ion-item no-lines>
+						  <ion-label floating class="ionlist">Select city of friend search </ion-label>
+						  <ion-select [(ngModel)]="city1">
+						    <ion-option *ngFor="let city of cities1" value="{{city}}">{{city}}</ion-option>
+						  </ion-select>
+						</ion-item>
+							<ion-item no-lines>
+								<button class="indexBtn" (click)="submit1(['findMatch', email, age1, intension1, country1, city1])">Find Match</button>
+							</ion-item>
+									<div style="color: grey;font-size: 14px; text-align: center;">Or</div>
+						    <ion-item no-lines>
+								<button class="indexBtn" (click)="submit1(['randomMatch',email])">Random Search</button>
+							</ion-item>
+				  </div>
+				</ion-slide>
+				<ion-slide class="content" on-scroll="gotScrolled($event,'content1')" id="content1">
+					<div class="slideDiv" offset-3 col-3></div>
+
+					<div *ngIf="friends.length > 0">
+						<ion-item no-lines *ngFor="let friend of friends" no-lines class="mainDiv">
+									<img src="{{provider.url+''+friend.image}}" (click)="imageclicked(friend)" class="friendImage">
+									<ion-item  class="itemDes">
+											<span class="name">{{friend.name}}</span><br/>
+											<div *ngIf="friend.more.Status !== 'Unfriend' " style="margin-left: 10px;padding-top: 10px">
+												<span *ngIf="friend.more.Status == 'Remove request' " style="font-size:13px;font-weight: lighter;">Request sent</span>
+												<button *ngIf="friend.more.Status == 'Accept' " class="acceptbtn" (click)="action(['Accept', friend.more.Id])">{{friend.more.Status}}</button>
+												<ion-icon  style="float: right" class="friendIcon" name="chatbubbles" (click)="friendClicked(['chat', friend, email])"></ion-icon>
+											</div>
+											<div *ngIf="friend.more.Status == 'Unfriend' " style="float:right;">
+												<ion-icon class="friendIcon" (click)="provider.callActon({callType: 'video', to: {
+												image: friend.image, email: friend.id, name: friend.name},
+												 from:{image: accountInfo.Profile_pic, email: accountInfo.Email, name: accountInfo.userName} })" name="videocam"></ion-icon>
+												<ion-icon class="friendIcon" (click)="provider.callActon({callType: 'audio', to: {
+												image: friend.image, email: friend.id, name: friend.name},
+												 from:{image: accountInfo.Profile_pic, email: accountInfo.Email, name: accountInfo.userName}})" name="call"></ion-icon>
+												<ion-icon class="friendIcon" name="chatbubbles" (click)="friendClicked(['chat', friend, email])"></ion-icon>
+											</div>
+									</ion-item>
+						</ion-item>
+					</div>
+					<div *ngIf="friends.length == 0" style="color:grey;margin-top:30%">
+		                    <span style="color:grey;font-size:30px;">Oops!!</span><br/>
+		                     <span style="color:grey;font-size:13px;">You don't have any 
+		                     	<span *ngIf="(matchData)">{{matchData}}</span> friends at the moment</span>
+                    </div>
+				</ion-slide>
+				<ion-slide on-scroll="gotScrolled($event, 'content2')" id="content2" class="content">
+					<div class="slideDiv" offset-6 col-3></div>
+					<div *ngIf="chats.length  > 0 ">
+						<ion-item no-lines *ngFor="let chat of chats" (click)="friendClicked(['chat', chat, email])" no-lines class="mainDiv">
+							<img src="{{provider.url+''+chat.image}}" class="friendImage">
+							<ion-item class="itemDes" *ngIf="!chat.message">
+									<span class="name">{{chat.name}}</span>
+							</ion-item>
+							<ion-item  class="itemDes" *ngIf="chat.message">
+									<span class="name">{{chat.name}} </span>
+									<div class="messtime">
+										<span *ngIf="chat.message.date === dateCheck[0]" >{{chat.message.time}}</span>
+										<span *ngIf="(chat.message.date === dateCheck[1])">Yesterday</span>
+										<span *ngIf="(chat.message.date !== dateCheck[0] && chat.message.date !== dateCheck[1])">{{chat.message.date}}</span>
+										<br/><br/>
+									<span class="unread" *ngIf="(chat.message.from !== email && chat.unread !== 0)">{{chat.unread}}</span></div><br/><br/>
+
+							     <ion-icon *ngIf="(chat.message.read == false && chat.message.from == email)" style="color: lightgrey" name="star"></ion-icon> 
+                                 <ion-icon *ngIf="(chat.message.read == true && chat.message.from == email)" style="color: gold" name="star"></ion-icon> 
+                                   <ion-icon *ngIf="(chat.message.image)" style="color: lightgrey" name="image"></ion-icon> {{chat.message.message}}
+							</ion-item>
+						</ion-item>
+					</div>
+					<div *ngIf="chats.length == 0" style="color:grey;margin-top:30%">
+		                    <span style="color:grey;font-size:30px;">Oops!!</span><br/>
+		                     <span style="color:grey;font-size:13px;">You don't have any <span *ngIf="(matchData)">{{matchData}}</span>  chats at the moment</span>
+                    </div>
+				</ion-slide>
+				<ion-slide style="margin-bottom: 100px;" class="content" on-scroll="gotScrolled($event, 'content3')" id="content3">
+					<div class="slideDiv" offset-9 col-3></div>
+					<div  *ngFor="let info of profileinfo let m = index ">
+						<div class="title">{{info.title}}</div>
+						<ion-list *ngIf="m == 0" radio-group [(ngModel)]="age">
+						  <ion-item no-lines *ngFor="let option of info.options">
+						    <ion-label class="ionlist">{{option}}</ion-label>
+						    <ion-radio  value="{{option}}" checked></ion-radio>
+						  </ion-item>
+						</ion-list>
+						<ion-list *ngIf="m == 1" radio-group [(ngModel)]="gender">
+						  <ion-item no-lines *ngFor="let option of info.options">
+						    <ion-label class="ionlist">{{option}}</ion-label>
+						    <ion-radio value="{{option}}" checked></ion-radio>
+						  </ion-item>
+						</ion-list>
+						<ion-list *ngIf="m == 2" radio-group [(ngModel)]="orientation">
+						  <ion-item no-lines *ngFor="let option of info.options">
+						    <ion-label class="ionlist">{{option}}</ion-label>
+						    <ion-radio value="{{option}}" checked></ion-radio>
+						  </ion-item>
+						</ion-list>
+						<ion-list *ngIf="m == 3" radio-group [(ngModel)]="intension">
+						  <ion-item no-lines *ngFor="let option of info.options">
+						    <ion-label class="ionlist">{{option}}</ion-label>
+						    <ion-radio value="{{option}}" checked></ion-radio>
+						  </ion-item>
+						</ion-list>
+               		</div>
+               		<ion-item no-lines>
+					  <ion-label class="ionlist">Country</ion-label>
+					  <ion-select [(ngModel)]="country" (ionChange)="countryChanged(country)">
+					    <ion-option *ngFor="let country of countries" value="{{country}}">{{country}}</ion-option>
+					  </ion-select>
+					</ion-item ><ion-item no-lines>
+					  <ion-label class="ionlist">City</ion-label>
+					  <ion-select [(ngModel)]="city">
+					    <ion-option *ngFor="let city of cities" value="{{city}}">{{city}}</ion-option>
+					  </ion-select>
+					</ion-item>
+					<ion-item no-lines>
+						<button class="indexBtn" [disabled]="(!country || !city || !age || !gender || !orientation || !intension)" (click)="submit([age, gender, orientation, intension, country, city])">Update profile</button>
+					</ion-item>
+				</ion-slide>
+			</ion-slides>
+		</ion-col>
+	</ion-row>
+</ion-grid>
+</ion-content>

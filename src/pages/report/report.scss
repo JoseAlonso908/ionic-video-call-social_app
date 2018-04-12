@@ -1,0 +1,23 @@
+page-report {
+    .reportitems{
+    display: inline-block;
+    word-wrap: break-word;
+    width:100%;
+    font-size: 16px;
+    font-family: arial;
+  }
+  textarea{
+    resize: none;
+    border: 1px solid #D80D88;
+    overflow-x: hidden;
+  }
+  .repotBtn{
+    padding:10px;
+    font-size: 20px;
+    background-color: #D80D88;
+    color:white;
+    width: 100%;
+    padding:10px;
+    border-radius: 5px;
+  }
+}

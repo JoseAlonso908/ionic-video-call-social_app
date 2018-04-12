@@ -1,0 +1,42 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+ .item-md.item-block .item-inner,
+.item-md.item-input.input-has-focus .item-inner,
+.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner,
+.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner,
+.list-md .item-input.input-has-focus:last-child,
+.list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child,
+.list-md .item-input.ng-invalid.ng-touched:not(.input-has-focus):last-child {
+    border-bottom: none;
+    box-shadow: none;
+}
+.list-md .item-input.input-has-focus:last-child .item-inner,
+.list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child .item-inner,
+.list-md .item-input.ng-invalid.ng-touched:not(.input-has-focus):last-child .item-inner {
+    box-shadow: none; 
+}
+
+ .profileImage{
+  	height:40px;
+  	width:40px;
+  	border-radius: 50%;
+  }
+ .padding{
+   	margin: 0px;
+   	padding:0px;
+   	height: 100%;
+   }

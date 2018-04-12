@@ -1,0 +1,46 @@
+page-call {
+     .profileImage{
+  	height:40px;
+  	width:40px;
+  	border-radius: 50%;
+    margin-top: 15px;
+    margin-left: 20px;
+  }
+  .name{
+	color: white;
+	position: absolute;
+	left:140px;
+	top:15px;
+	font-weight: bold;
+	font-size: 19px;
+  }
+  #video{
+  	margin:0px;
+
+  }
+  .height{
+  	height:100%;
+  	text-align: center;
+  	padding:0px;
+  	margin:0px;
+  }
+  .btn{
+  	 height: 50px;
+  	 width:50px;
+  	 border-radius: 50%;
+  	 box-shadow: 2px 2px 1px grey;
+  	 margin-left: 20px;
+  	 margin-right: 20px;
+  }
+  
+  .callType{
+  	font-size:13px;
+  	color: white;
+  	font-weight: bold;
+  	margin-left: 10px
+  }
+  .iconx{
+  	font-size: 32px;
+  	color: white;
+  }
+}
